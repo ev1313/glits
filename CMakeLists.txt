@@ -5,8 +5,8 @@ set(INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
-find_package(OpenCV REQUIRED)
 find_package(epoxy REQUIRED)
+find_package(OpenCV REQUIRED)
 
 function(setup_target NAME)
   set_property(TARGET ${NAME} PROPERTY CXX_STANDARD 14)
@@ -27,7 +27,10 @@ set(GLITS_INC
 add_library(${PROJECT_NAME} STATIC ${GLITS_INC} ${GLITS_SRC})
 setup_target(${PROJECT_NAME})
 
-target_link_libraries(${PROJECT_NAME} ${OPENCV_LIBS})
+target_link_libraries(${PROJECT_NAME} ${EPOXY_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 target_link_libraries(${PROJECT_NAME} "atomic")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIRS})
+
+add_subdirectory(tests)
