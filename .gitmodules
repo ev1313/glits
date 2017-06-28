@@ -1,3 +1,6 @@
 [submodule "tests/Catch"]
 	path = tests/Catch
 	url = https://github.com/philsquared/Catch/
+[submodule "cmake-modiwlau"]
+	path = cmake-modiwlau
+	url = https://git.j3d1.de/end/cmake-modiwlau

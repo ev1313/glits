@@ -16,9 +16,9 @@ bool glits::check_mat(cv::Mat img1, cv::Mat img2, double max_mean, double max_de
   auto mean = meanmat.val[0];
   auto stddev = stddevmat.val[0];
 
+  std::cout << "GLITS: "
+            << " mean: " << mean << " max mean: " << max_mean << " stddev: " << stddev << " max stddev: " << max_dev << std::endl;
   if (mean > max_mean || stddev > max_dev) {
-    std::cout << "GLITS: "
-              << " mean: " << mean << " max mean: " << max_mean << " stddev: " << stddev << " max stddev: " << max_dev << std::endl;
     return false;
   }
   return true;

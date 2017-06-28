@@ -3,10 +3,14 @@ cmake_minimum_required(VERSION 3.0)
 
 set(INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/")
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake-modiwlau")
+
+include(LibSetTarget)
 
 find_package(epoxy REQUIRED)
 find_package(OpenCV REQUIRED)
+
+option(BUILD_TESTS "build tests" ON)
 
 function(setup_target NAME)
   set_property(TARGET ${NAME} PROPERTY CXX_STANDARD 14)
@@ -24,8 +28,7 @@ set(GLITS_INC
   glits/glits.hpp
 	)
 
-add_library(${PROJECT_NAME} STATIC ${GLITS_INC} ${GLITS_SRC})
-setup_target(${PROJECT_NAME})
+setup_cxx_library(TARGET_NAME ${PROJECT_NAME} STATIC ${GLITS_INC} ${GLITS_SRC})
 
 target_link_libraries(${PROJECT_NAME} ${EPOXY_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
@@ -33,4 +36,6 @@ target_link_libraries(${PROJECT_NAME} "atomic")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIRS})
 
-add_subdirectory(tests)
+IF(BUILD_TESTS)
+  add_subdirectory(tests)
+ENDIF(BUILD_TESTS)
