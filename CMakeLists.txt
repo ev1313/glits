@@ -10,7 +10,7 @@ include(LibSetTarget)
 find_package(epoxy REQUIRED)
 find_package(OpenCV REQUIRED)
 
-option(GLITS_BUILD_TESTS "build tests" ON)
+option(GLITS_BUILD_TESTS "build tests" OFF)
 
 function(setup_target NAME)
   set_property(TARGET ${NAME} PROPERTY CXX_STANDARD 14)
