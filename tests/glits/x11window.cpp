@@ -36,7 +36,6 @@ void X11Window::open() {
 
   m_atomWmDeleteWindow = XInternAtom(m_display, "WM_DELETE_WINDOW", False);
   XSetWMProtocols(m_display, m_window, &m_atomWmDeleteWindow, 1);
-  XEvent xev;
   /*
   if (ISSET_FLAG(FULLSCREEN)) {
     Atom wm_state = XInternAtom(m_display, "_NET_WM_STATE", False);
