@@ -7,15 +7,8 @@
 #include <epoxy/glx.h>
 #include <stdexcept>
 
-#if USE_GAWO
-#include "gawo/glwindow.hpp"
-#endif
-
 namespace x11 {
 class X11Window
-#if USE_GAWO
-    : gawo::GLWindow
-#endif
 {
 private:
   // X-related stuff
