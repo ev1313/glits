@@ -24,7 +24,11 @@ bool glits::check_mat(cv::Mat img1, cv::Mat img2, double max_mean, double max_de
   return true;
 }
 
-bool glits::check_buffer(std::string ref, GLuint bufid, double max_mean, double max_dev, bool generate) { return true; }
+bool glits::check_buffer(std::string ref, GLuint bufid, double max_mean, double max_dev, bool generate) {
+
+
+  return false;
+}
 
 bool glits::check_texture(std::string ref, GLuint texid, double max_mean, double max_dev, bool generate) {
   GLint w, h;
@@ -58,6 +62,7 @@ bool glits::check_texture(std::string ref, GLuint texid, double max_mean, double
   } else {
     cv::imwrite(ref, img);
   }
+  return true;
 }
 
 bool glits::check_framebuffer(std::string ref, double max_mean, double max_dev, bool generate) {

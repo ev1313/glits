@@ -1,5 +1,13 @@
 find_package(X11 REQUIRED)
 
+option(GENERATE_TESTS "generate the test data out of the actual state." OFF)
+
+if(GENERATE_TESTS)
+  add_definitions(-DGLITS_GENERATE_TESTS=true)
+else(GENERATE_TESTS)
+  add_definitions(-DGLITS_GENERATE_TESTS=false)
+endif(GENERATE_TESTS)
+
 set(TEST_SRC
   glits/x11window.cpp
   glits/testimage.cpp
