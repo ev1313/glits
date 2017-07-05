@@ -10,7 +10,7 @@ include(LibSetTarget)
 find_package(epoxy REQUIRED)
 find_package(OpenCV REQUIRED)
 
-option(BUILD_TESTS "build tests" ON)
+option(GLITS_BUILD_TESTS "build tests" ON)
 
 function(setup_target NAME)
   set_property(TARGET ${NAME} PROPERTY CXX_STANDARD 14)
@@ -36,6 +36,6 @@ target_link_libraries(${PROJECT_NAME} "atomic")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIRS})
 
-IF(BUILD_TESTS)
+IF(GLITS_BUILD_TESTS)
   add_subdirectory(tests)
-ENDIF(BUILD_TESTS)
+ENDIF(GLITS_BUILD_TESTS)
