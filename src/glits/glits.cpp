@@ -24,11 +24,7 @@ bool glits::check_mat(cv::Mat img1, cv::Mat img2, double max_mean, double max_de
   return true;
 }
 
-bool glits::check_buffer(std::string ref, GLuint bufid, double max_mean, double max_dev, bool generate) {
-
-
-  return false;
-}
+bool glits::check_buffer(std::string ref, GLuint bufid, double max_mean, double max_dev, bool generate) { return false; }
 
 bool glits::check_texture(std::string ref, GLuint texid, double max_mean, double max_dev, bool generate) {
   GLint w, h;
@@ -71,6 +67,8 @@ bool glits::check_framebuffer(std::string ref, double max_mean, double max_dev, 
   glGetIntegerv(GL_VIEWPORT, dims);
   cv::Mat img(dims[3], dims[2], CV_8UC3);
   img.create(dims[3], dims[2], CV_8UC3);
+
+  std::cout << "glits: opengl framebuffer dimensions: " << dims[0] << " " << dims[1] << " " << dims[2] << " " << dims[3] << std::endl;
 
   // use fast 4-byte alignment (default anyway) if possible
   GLint packalignment;
