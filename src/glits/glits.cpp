@@ -24,15 +24,22 @@ bool glits::check_mat(cv::Mat img1, cv::Mat img2, double max_mean, double max_de
   return true;
 }
 
-bool glits::check_buffer(std::string ref, GLuint bufid, double max_mean, double max_dev, bool generate) { return false; }
+bool glits::check_buffer(std::string ref, GLuint bufid, double max_mean, double max_dev, bool generate) {
+  //todo
+  std::cout << "glits::check_buffer not implemented yet!" << std::endl;
+  return false; }
 
 bool glits::check_texture(std::string ref, GLuint texid, double max_mean, double max_dev, bool generate) {
-  GLint w, h;
+  glBindTexture(GL_TEXTURE_2D, texid);
+  GLint w = 0;
+  GLint h = 0;
   glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
   glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
 
   cv::Mat img(w, h, CV_8UC3);
   img.create(w, h, CV_8UC3);
+  
+  std::cout << "glits::check_texture img  w:" << w << " h: " << h << std::endl;
 
   // use fast 4-byte alignment (default anyway) if possible
   GLint packalignment;
@@ -42,7 +49,7 @@ bool glits::check_texture(std::string ref, GLuint texid, double max_mean, double
   // set length of one complete row in destination data (doesn't need to equal img.cols)
   GLint packrowlength;
   glGetIntegerv(GL_PACK_ROW_LENGTH, &packrowlength);
-  glPixelStorei(GL_PACK_ROW_LENGTH, img.step / img.elemSize());
+  glPixelStorei(GL_PACK_ROW_LENGTH, (GLint) (img.step / img.elemSize()));
 
   glGetTexImage(GL_TEXTURE_2D, 0, GL_BGR, GL_UNSIGNED_BYTE, img.data);
 
@@ -53,9 +60,11 @@ bool glits::check_texture(std::string ref, GLuint texid, double max_mean, double
   if (!generate) {
     cv::Mat img2;
     img2 = cv::imread(ref, 1);
+    std::cout << "glits::check_texture img2 w:" << img2.rows << " h: " << img2.cols << std::endl;
 
     return check_mat(img, img2, max_mean, max_dev);
   } else {
+    std::cout << "glits::check_texture generating " << ref << " w: " << img.rows << " h: " << img.cols << std::endl;
     cv::imwrite(ref, img);
   }
   return true;
@@ -78,7 +87,7 @@ bool glits::check_framebuffer(std::string ref, double max_mean, double max_dev, 
   // set length of one complete row in destination data (doesn't need to equal img.cols)
   GLint packrowlength;
   glGetIntegerv(GL_PACK_ROW_LENGTH, &packrowlength);
-  glPixelStorei(GL_PACK_ROW_LENGTH, img.step / img.elemSize());
+  glPixelStorei(GL_PACK_ROW_LENGTH, (GLint) (img.step / img.elemSize()));
 
   glReadPixels(dims[0], dims[1], dims[2], dims[3], GL_BGR, GL_UNSIGNED_BYTE, img.data);
 
