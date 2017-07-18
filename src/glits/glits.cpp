@@ -36,8 +36,8 @@ bool glits::check_texture(std::string ref, GLuint texid, double max_mean, double
   glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
   glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
 
-  cv::Mat img(w, h, CV_8UC3);
-  img.create(w, h, CV_8UC3);
+  cv::Mat img(h, w, CV_8UC3);
+  img.create(h, w, CV_8UC3);
   
   std::cout << "glits::check_texture img  w:" << w << " h: " << h << std::endl;
 
